@@ -1,34 +1,37 @@
 #!/bin/bash
 
-# Membersihkan terminal
-clear
 
-# Memeriksa argumen yang diberikan
+clear
+echo ""
+echo -e "\e[1;35m   Selamat Datang Gais^-^   \e[0m"
+echo ""
+
+
 if [[ "$1" == --play=* ]]; then
     TRACK="${1#--play=}"
 else
-    echo "Usage: ./dsotm.sh --play=\"<Track>\""
+    echo "Menggunakan metode ./dsotm.sh --play=\"<Track>\""
     exit 1
 fi
 
-# Fungsi untuk menampilkan informasi tentang lagu
+
 title() {
-    echo "===================================="
-    echo "...................................."
-    echo "  Lagu diputar: $1"
-    echo "...................................."
-    echo "===================================="
+    echo -e "\e[1;34m============================\e[0m"
+    echo "............................"
+    echo -e "\e[1;31m  PLAYING NOW: $1 \e[0m"
+    echo  "............................"
+    echo -e "\e[1;34m============================\e[0m"
 }
 
 play_track() {
     case "$1" in
         "Speak to Me")
             title "Speak to Me"
-            while true; do
-                curl -s https://www.affirmations.dev | jq -r '.affirmation'
+                curl -s https://raw.githubusercontent.com/annthurium/affirmations/refs/heads/main/affirmations.js | sed '1d;$d' |  sed -E 's/^[[:space:]]*"//;s/",?$//;' | grep -v '^\];$' | while IFS= read -r line; do
+		echo "$line"
                 sleep 1
-            done
-            ;;
+	done
+	    ;;
         "On the Run")
             title "On the Run"
             progress=0
@@ -39,12 +42,12 @@ play_track() {
                 sleep $(awk -v min=0.1 -v max=1 'BEGIN{srand(); print min+rand()*(max-min)}')
             done
 	    echo ""
-            echo "TERSELESAIKAN!^-^"
+            echo -e "\e[1;36m TERSELESAIKAN!^-^\e[0m"
             ;;
         "Time")
             title "Time"
             while true; do
-                date '+%Y-%m-%d %H:%M:%S'
+            echo -ne "\r----- \e[1;33m$(date '+%A | %Y-%m-%d | %H:%M:%S') -----\e[0m"
                 sleep 1
             done
             ;;
@@ -59,7 +62,6 @@ play_track() {
                     done
                     echo ""
                 done
-                
                 sleep 0.1
             done
             ;;
@@ -77,6 +79,5 @@ play_track() {
     esac
 }
 
-# Menjalankan fungsi play_track
 play_track "$TRACK"
 
