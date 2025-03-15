@@ -28,7 +28,7 @@ case "$jawaban" in
 echo "--help              Display this help message."
 echo "--info              Display the highest adjusted and raw usage."
 echo "--sort              Sort the data by the specified colum."
-echo "Name                Sort by Pokemon name"
+echo "Nama                Sort by Pokemon name"
 echo "Usage               Sort by Adjusted Usage."
 echo "Raw                 Sort by Adjusted Raw."
 echo "HP                  Sort by Adjusted HP."
@@ -56,7 +56,7 @@ sort -t ',' -k3 -nr pokemon_usage.csv
 ;;
  "Nama")
   # -- Nama --
-echo "sort berdasarkan RawUsage"
+echo "sort berdasarkan Nama"
 sort -t ',' -f -k1  pokemon_usage.csv
 ;;
  "HP")
