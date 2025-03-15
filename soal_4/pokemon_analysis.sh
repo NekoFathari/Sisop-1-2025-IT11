@@ -90,8 +90,14 @@ echo  "sort berdasarkan speed "
 sort -t ',' -k11 -nr pokemon_usage.csv
 ;;
  "--grep")
+ #-- Grep --
+ echo "sort berdasarkan usage"
+ sort -t, -k2 -r pokemon_usage.csv
 ;;
  "--filter")
+ #-- filter --
+ echo "sort berdasarkan usage"
+ sort -t, -k2 -r pokemon_usage.csv
 ;;
 esac
 
