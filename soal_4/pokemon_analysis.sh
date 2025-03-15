@@ -39,7 +39,6 @@ echo "Sp.Def              Sort by Adjusted Sp.Def."
 echo "Speed               Sort by Adjusted Speed."
 echo "--grep              Search for a specific Pokemon sorted by usage."
 echo "--filter            Filter by type of Pokemon sorted by usage."
-
 ;;
 "--info")
 sort -t ',' -k2 -nr pokemon_usage.csv | awk -F ',' 'NR==1 {max=$2} $2 == max {print "Highest Adjusted Usage:",$1,"with",$2}'
