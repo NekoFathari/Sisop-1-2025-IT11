@@ -1,4 +1,49 @@
 #!/bin/bash
+
+echo "               __                                 "
+echo "______   ____ |  | __ ____   _____   ____   ____  "
+echo "\____ \ /  _ \|  |/ _/ __ \ /     \ /  _ \ /    \ "
+echo "|  |_> (  <_> |    <\  ___/|  Y Y  (  <_> |   |  \ "
+echo "|   __/ \____/|__|_ \\___  |__|_|  /\____/|___|  /"
+echo "|__|               \/    \/      \/            \/ "
+echo "Options : "
+echo "--help"
+echo "--info"
+echo " Sort by : "
+echo " Usage"
+echo " RawUsage"
+echo " Nama"
+echo " HP"
+echo " Atk"
+echo " Def"
+echo " Sp.Atk"
+echo " Sp.Def"
+echo " Speed"
+echo "--grep"
+echo "--filter"
+echo -n "jawab: "
+read jawaban
+case "$jawaban" in
+ "--help")
+echo "--help              Display this help message."
+echo "--info              Display the highest adjusted and raw usage."
+echo "--sort              Sort the data by the specified colum."
+echo "Name                Sort by Pokemon name"
+echo "Usage               Sort by Adjusted Usage."
+echo "Raw                 Sort by Adjusted Raw."
+echo "HP                  Sort by Adjusted HP."
+echo "Atk                 Sort by Adjusted Atk."
+echo "Def                 Sort by Adjusted Def."
+echo "Sp.Atk              Sort by Adjusted Sp.Atk."
+echo "Sp.Def              Sort by Adjusted Sp.Def."
+echo "Speed               Sort by Adjusted Speed."
+echo "--grep              Search for a specific Pokemon sorted by usage."
+echo "--filter            Filter by type of Pokemon sorted by usage."
+
+;;
+"--info")
+sort -t ',' -k2 -nr pokemon_usage.csv | awk -F ',' 'NR==1 {max=$2} $2 == max {print "Highest Adjusted Usage:",$1,"with",$2}'
+sort -t ',' -k3 -nr pokemon_usage.csv | awk -F ',' 'NR==1 {max=$3} $3 == max {print "Highest Raw Usage:",$1,"with",$3}'
 ;;
  "Usage")
   # -- Usage --
@@ -50,7 +95,6 @@ sort -t ',' -k11 -nr pokemon_usage.csv
  "--filter")
 ;;
 esac
-
 
 
 
