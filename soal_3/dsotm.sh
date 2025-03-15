@@ -112,7 +112,7 @@ play_track() {
         ;;
 
         *)
-		echo "Track tidak dikenali. Silakan pilih dari: Speak to Me, On the Run, Time, Money, Brain Damage."
+		echo "Sayang sekali lagu anda tidak dikenali. Silakan pilih lagu yang telah disediakan: Speak to Me, On the Run, Time, Money, Brain Damage."
             	exit 1
        ;;
     esac
