@@ -502,6 +502,56 @@ untuk kolom yang berisi angka kita sort dengan numerik dan yang nama kita sort s
 # Output
 ![image](https://github.com/user-attachments/assets/9e739819-644f-483c-9f01-8ff105c74361)
 
+# D.
+
+
+# E.
+
+
+# F. Helpscreen 
+Helpscreen dibuat untuk mempermudah user mencari info untuk setiap command dan sub-command
+```
+  echo -e "\e[33m               __                                 \e[0m"
+    echo -e "\e[33m______   ____ |  | __ ____   _____   ____   ____  \e[0m"
+    echo -e "\e[33m\\____ \\ /  _ \\|  |/ _/ __ \\ /     \\ /  _ \\ /    \\ \e[0m"
+    echo -e "\e[33m|  |_> (  <_> |    <\\  ___/|  Y Y  (  <_> |   |  \\ \e[0m"
+    echo -e "\e[33m|   __/ \\____/|__|_ \\\\___  |__|_|  /\\____/|___|  / \e[0m"
+    echo -e "\e[33m|__|               \\/    \\/      \\/            \\/ \e[0m"
+    echo
+    echo -e "\e[34m+-----------------------------------------------+\e[0m"
+    echo -e "\e[34m|                   Options                     |\e[0m"
+    echo -e "\e[34m+-----------------------------------------------+\e[0m"
+    echo -e "\e[34m| --help                                        |\e[0m"
+    echo -e "\e[34m| --info                                        |\e[0m"
+    echo -e "\e[34m| Sort by:                                      |\e[0m"
+    echo -e "\e[34m|     Usage     |   RawUsage   |     Nama       |\e[0m"
+    echo -e "\e[34m|     HP        |     Atk      |     Def        |\e[0m"
+    echo -e "\e[34m|     Sp.Atk    |    Sp.Def    |     Speed      |\e[0m"
+    echo -e "\e[34m| --grep                                        |\e[0m"
+    echo -e "\e[34m| --filter                                      |\e[0m"
+    echo -e "\e[34m+-----------------------------------------------+\e[0m"
+    echo
+    echo -n "Enter your choice: "
+    read jawaban
+
+    case "$jawaban" in
+        "--help")
+            echo "--help              Display this help message."
+            echo "--info              Display the highest adjusted and raw usage."
+            echo "--sort              Sort the data by the specified column."
+            echo "Nama                Sort by Pokemon name."
+            echo "Usage               Sort by Adjusted Usage."
+            echo "Raw                 Sort by Adjusted Raw."
+            echo "HP                  Sort by Adjusted HP."
+            echo "Atk                 Sort by Adjusted Atk."
+            echo "Def                 Sort by Adjusted Def."
+            echo "Sp.Atk              Sort by Adjusted Sp.Atk."
+            echo "Sp.Def              Sort by Adjusted Sp.Def."
+            echo "Speed               Sort by Adjusted Speed."
+            echo "--grep              Search for a specific Pokemon sorted by usage."
+            echo "--filter            Filter by type of Pokemon sorted by usage."
+            ;;
+```
 
 
 
