@@ -246,7 +246,7 @@ Mengambil data https://raw.githubusercontent.com/annthurium/affirmations/refs/he
 	done
 	    ;;
 
-## Output
+# Output
 ![image](https://github.com/user-attachments/assets/7c8f95a0-d251-4409-820b-0b2e02f7c80c)
 
 ## B. On the Run
@@ -292,16 +292,100 @@ Outputnya progress bar tidak full hingga ke ujung kanan.
             echo -e "\e[1;36m TERSELESAIKAN!^-^\e[0m"
             ;;
 
-## Output setelah perbaikan
+# Output setelah perbaikan
 ![image](https://github.com/user-attachments/assets/6e60aae5-5c77-4aad-b507-b315f6d5c6de)
 
+### C. Time
+Membuat Live clock yang menunjukkan hari, tanggal, jam, menit, dan detik.
 
+ 	"Time")
+            title "Time"
+            while true; do
+            echo -ne "\r----- \e[1;33m$(date '+%A | %Y-%m-%d | %H:%M:%S') -----\e[0m"
+                sleep 1
+            done
+            ;;
 
-    
+# Output
+![image](https://github.com/user-attachments/assets/a8ef97ac-23af-4768-a334-cb102ac331d0)
 
+### D. Money
+Membuat program mirip dengan cmatrix tetapi isinya diganti dengan simbol  $ € £ ¥ ¢ ₹ ₩ ₿ ₣
 
+	"Money")
+	title "Money Rain"
+		symbols=( "$" "€" "£" "¥" "₫" "₹" "฿" "₣" )
+		cols=$(tput cols)
+		rows=$(tput lines)
+		declare -a rain
 
+		for ((i=0; i<$cols; i++)); do
+		rain[$i]=$(( RANDOM % rows ))
+		done
 
+		while true; do
+    		clear
+    		for ((row=0; row<$rows; row++)); do
+        	for ((col=0; col<$cols; col++)); do
+            if [[ ${rain[$col]} -eq $row ]]; then
+                printf "\e[31m%s\e[0m" "${symbols[RANDOM % ${#symbols[@]}]}"
+            else
+                printf " "
+            fi
+        done
+        echo ""
+    done
+
+    	for ((i=0; i<$cols; i++)); do
+        ((rain[$i]++))
+        if (( rain[$i] > rows )); then
+            rain[$i]=0
+        fi
+    done
+
+    sleep 0.2
+	done
+	    ;;
+
+# Output
+![image](https://github.com/user-attachments/assets/f50d5cc7-12f3-465f-9d67-7e7dfa2e5f7a)
+
+### E. Brain Damage
+Menampilkan proses yang sedang berjalan, seperti task manager tetapi menampilkan didalam terminal dan membuat agar task managernya menampilkan data baru setiap detiknya.
+
+	 "Brain Damage")
+            title "Brain Damage"
+ 		while true; do
+		clear
+	echo -e "\e[31m================ Waktu ================\e[0m"
+ 	echo -e "Time: $(date)"
+
+	echo -e "\e[35m~~~~~~~~~~~~~~~~ Penggunaan Dalam CPU ~~~~~~~~~~~~~~~~\e[0m"
+	top -bn1 | grep "Cpu(s)" | awk '{print "User: " $2 "%, System: " $4 "%, Idle: " $8 "%"}'
+
+	echo -e "\e[36m---------------- Penggunaan Dalam Memori ----------------\e[0m"
+	free -h | awk 'NR==2{printf "Total: %s, Used: %s, Free: %s\n", $2, $3, $4}'
+
+	echo -e "\e[35m************* Daftar Process *************\e[0m"
+	printf "| %-8s | %-10s | %-6s | %-6s | %-20s |\n" "PID" "USER" "%CPU" "%MEM" "COMMAND"
+	echo "|----------|------------|--------|--------|----------------------|"
+	ps -eo pid,user,%cpu,%mem,comm --sort=-%cpu | head -11 | awk '{printf "| %-8s | %-10s | %-6s | %-6s | %-20s |\n", $1, $2, $3, $4, $5}'
+
+	sleep 1
+	done
+        ;;
+
+        *)
+		echo "Sayang sekali lagu anda tidak dikenali. Silakan pilih lagu yang telah disediakan: Speak to Me, On the Run, Time, Money, Brain Damage." //ketika track diluar 5 album tersebut
+            	exit 1
+       ;;
+    esac
+}
+
+# Outputnya
+![image](https://github.com/user-attachments/assets/d285b614-e667-4d96-ab4a-610e28225262)
+
+Lalu yang terakhir adalah play_track "$TRACK" sebagai memanggil fungsi play_track dengan argumen yang sudah diambil dari --play=<Track> di awal script.
 
 
 
