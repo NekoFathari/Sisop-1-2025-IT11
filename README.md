@@ -382,10 +382,25 @@ Menampilkan proses yang sedang berjalan, seperti task manager tetapi menampilkan
     esac
 }
 
-# Outputnya
+# Output
 ![image](https://github.com/user-attachments/assets/d285b614-e667-4d96-ab4a-610e28225262)
 
 Lalu yang terakhir adalah play_track "$TRACK" sebagai memanggil fungsi play_track dengan argumen yang sudah diambil dari --play=<Track> di awal script.
+
+### Soal 4
+
+# C. Mencari nama pokemon tertentu
+
+ 	 case "$COMMAND" in
+        --grep)
+            head -n 1 "$FILE"
+            grep -i "^$SEARCH_TERM" "$FILE" | sort -t ',' -k2 -r
+            ;;
+
+# Output
+![image](https://github.com/user-attachments/assets/9e739819-644f-483c-9f01-8ff105c74361)
+
+
 
 
 
