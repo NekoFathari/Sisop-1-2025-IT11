@@ -1,17 +1,20 @@
 #!/bin/bash
 
-export LOG_DIR="/home/fathari/ITS/Code/SISOP/MODUL_1/soal_2/logs"
+export DATA_DIR="/home/fathari/ITS/Code/SISOP/MODUL_1/soal_2"
+export LOG_DIR=$DATA_DIR/logs
+export SCRIPT_DIR=$DATA_DIR/scripts
+
 
 function add_cron_core() {
     local cron_file="/etc/cron.d/core_monitor"
-    local script_path="/home/fathari/ITS/Code/SISOP/MODUL_1/scripts/core_monitor.sh"
+    local script_path=$SCRIPT_DIR/core_monitor.sh
     local cron_schedule="* * * * * root $script_path"
     echo "$cron_schedule" > $cron_file
 }
 
 function add_cron_frag() {
     local cron_file="/etc/cron.d/frag_monitor"
-    local script_path="/home/fathari/ITS/Code/SISOP/MODUL_1/scripts/frag_monitor.sh"
+    local script_path=$SCRIPT_DIR/frag_monitor.sh
     local cron_schedule="* * * * * root $script_path"
     echo "$cron_schedule" > $cron_file
 }
