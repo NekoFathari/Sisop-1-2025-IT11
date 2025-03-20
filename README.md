@@ -11,6 +11,20 @@
 # Reporting
 #### SOAL 1
 
+Soal ini meminta untuk output berupa menu dengan setiap case nya yaitu 
+1.menghitung jumlah baris di tablet ajaib yang menunjukkan buku-buku yang dibaca oleh Chris Hemsworth.
+2.menghitung rata-rata durasi membaca (Reading_Duration_Minutes) untuk buku-buku yang dibaca menggunakan “Tablet”
+3.mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca
+4.menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya, agar laporannya jadi yang terbaik di klub.
+
+untuk memenuhi permintaan nomor 1 kita perlu mencari baris yang hanya menampilkan Chris Hemsworth dan menghitung berapa banyak baris itu muncul dengan menggunakan command 
+
+###poppo_siroyo.sh
+awk '/Chris Hemsworth/  { ++n }
+END { print "Chris Hemsworth membaca", n, "buku." }' reading_data.csv
+
+
+
 <ISINYA>
 
 #### SOAL 2
