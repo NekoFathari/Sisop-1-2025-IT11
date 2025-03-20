@@ -18,7 +18,7 @@ function login() {
 
     if grep -q "$email" $DATA_DIR/data/player.csv; then
         local password=$2
-        local encrypted_password=$(awk -F, -v email=$email '$1 == email {print $3}' $DATA_DIR/player.csv)
+        local encrypted_password=$(awk -F, -v email=$email '$1 == email {print $3}' $DATA_DIR/data/player.csv)
         local salt="uwaw"
         local type_password=$(echo -n $password$salt | sha256sum | awk '{print $1}')
         if [ "$encrypted_password" == "$type_password" ]; then
