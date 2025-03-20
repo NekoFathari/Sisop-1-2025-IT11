@@ -28,20 +28,36 @@ main_menu() {
 
     case "$jawaban" in
         "--help")
-            echo "--help              Display this help message."
-            echo "--info              Display the highest adjusted and raw usage."
-            echo "--sort              Sort the data by the specified column."
-            echo "Nama                Sort by Pokemon name."
-            echo "Usage               Sort by Adjusted Usage."
-            echo "Raw                 Sort by Adjusted Raw."
-            echo "HP                  Sort by Adjusted HP."
-            echo "Atk                 Sort by Adjusted Atk."
-            echo "Def                 Sort by Adjusted Def."
-            echo "Sp.Atk              Sort by Adjusted Sp.Atk."
-            echo "Sp.Def              Sort by Adjusted Sp.Def."
-            echo "Speed               Sort by Adjusted Speed."
-            echo "--grep              Search for a specific Pokemon sorted by usage."
-            echo "--filter            Filter by type of Pokemon sorted by usage."
+            clear
+            echo -e "\e[33m                     __                                 \e[0m"
+            echo -e "\e[33m      ______   ____ |  | __ ____   _____   ____   ____  \e[0m"
+            echo -e "\e[33m      \\____ \\ /  _ \\|  |/ _/ __ \\ /     \\ /  _ \\ /    \\ \e[0m"
+            echo -e "\e[33m      |  |_> (  <_> |    <\\  ___/|  Y Y  (  <_> |   |  \\ \e[0m"
+            echo -e "\e[33m      |   __/ \\____/|__|_ \\\\___  |__|_|  /\\____/|___|  / \e[0m"
+            echo -e "\e[33m      |__|               \\/    \\/      \\/            \\/ \e[0m"
+            echo
+            echo -e "\e[34m+----------------------+----------------------------------+\e[0m"
+            echo -e "\e[34m|        Option        |            Description           |\e[0m"
+            echo -e "\e[34m+----------------------+----------------------------------+\e[0m"
+            echo -e "\e[34m| --help or -h         | Display this help message.       |\e[0m"
+            echo -e "\e[34m| --info               | Display the highest adjusted     |\e[0m"
+            echo -e "\e[34m|                      | and raw usage.                   |\e[0m"
+            echo -e "\e[34m| --sort               | Sort the data by the specified   |\e[0m"
+            echo -e "\e[34m|                      | column.                          |\e[0m"
+            echo -e "\e[34m|   Nama               | Sort by Pokemon name.            |\e[0m"
+            echo -e "\e[34m|   Usage              | Sort by Adjusted Usage.          |\e[0m"
+            echo -e "\e[34m|   Raw                | Sort by Adjusted Raw.            |\e[0m"
+            echo -e "\e[34m|   HP                 | Sort by Adjusted HP.             |\e[0m"
+            echo -e "\e[34m|   Atk                | Sort by Adjusted Atk.            |\e[0m"
+            echo -e "\e[34m|   Def                | Sort by Adjusted Def.            |\e[0m"
+            echo -e "\e[34m|   Sp.Atk             | Sort by Adjusted Sp.Atk.         |\e[0m"
+            echo -e "\e[34m|   Sp.Def             | Sort by Adjusted Sp.Def.         |\e[0m"
+            echo -e "\e[34m|   Speed              | Sort by Adjusted Speed.          |\e[0m"
+            echo -e "\e[34m| --grep               | Search for a specific Pokemon    |\e[0m"
+            echo -e "\e[34m|                      | sorted by usage.                 |\e[0m"
+            echo -e "\e[34m| --filter             | Filter by type of Pokemon        |\e[0m"
+            echo -e "\e[34m|                      | sorted by usage.                 |\e[0m"
+            echo -e "\e[34m+----------------------+----------------------------------+\e[0m"
             ;;
         "--info")
             sort -t ',' -k2 -nr pokemon_usage.csv | awk -F ',' 'NR==1 {max=$2} $2 == max {print "Highest Adjusted Usage:",$1,"with",$2}'
@@ -114,7 +130,7 @@ running_with_param() {
             ;;
         --filter)
             head -n 1 "$FILE"
-            awk -F',' -v type="$SEARCH_TERM" 'NR==1 || tolower($4) == tolower(type) || tolower($5) == tolower(type)' "$FILE" | sort -t ',' -k2 -r
+            sort -t ',' -k2 -r "$FILE" 
             ;;
         --info)
             sort -t ',' -k2 -nr "$FILE" | awk -F ',' 'NR==1 {max=$2} $2 == max {print "Highest Adjusted Usage:",$1,"with",$2}'
@@ -208,6 +224,8 @@ elif [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
         echo -e "\e[34m|                      | sorted by usage.                 |\e[0m"
         echo -e "\e[34m+----------------------+----------------------------------+\e[0m"
         exit 0
+elif [ "$#" -eq 2 ]; then
+    running_with_param "$1" "$2"
 elif [ "$#" -eq 3 ]; then
     running_with_param "$1" "$2" "$3"
 else
