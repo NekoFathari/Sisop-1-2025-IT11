@@ -30,6 +30,9 @@ untuk memenuhi permintaan a kita perlu membuat script mencari baris yang hanya m
     awk '/Chris Hemsworth/  { ++n }
 END { print "Chris Hemsworth membaca", n, "buku." }' reading_data.csv
 ```
+## Output
+![image](https://github.com/user-attachments/assets/ae54828b-c5dc-4765-9c66-d9ff87c291a0)
+
 # B. menghitung rata-rata durasi membaca
 kemudian untuk soal b kita perlu membuat script memfilter kata tablet dan menghitung berapa kali baris itu mmuncul dan menjumlah semua output di tabel durasi supaya bisa menghitung rata-rata. 
 
@@ -37,17 +40,25 @@ kemudian untuk soal b kita perlu membuat script memfilter kata tablet dan menghi
  awk -F ',' '$8 ~ /Tablet/ {total += $6; count++ }
 END { rata = total/count; print "Rata-rata durasi membaca dengan Tablet adalah", rata,"menit."}' reading_data.csv
 ```
+## Output
+![image](https://github.com/user-attachments/assets/fd174726-c3c6-425a-9063-2b4614add733)
+
 # C. rating tertinggi untuk buku yang dibaca
 selanjutnya untuk soal c kita membuat script agar menyortir data berdasarkan kolom rating dalam urutan menurun menggunakan ```sort```, lalu menampilkan pembaca dengan rating tertinggi
 ```
 sort -t ',' -k7 -nr reading_data.csv | awk -F ',' 'NR == 1 {max =$7} $7 == max {print "Pembaca dengan rating tertinggi : ", $2, "-" ,$3, "-", max}'
 ```
+## Output
+![image](https://github.com/user-attachments/assets/d3f548c1-39dd-4773-8b8d-8076474ddb54)
+
 # D. genre yang paling sering dibaca
 dan soal terkahir kita diminta untuk mencari genre paling populer, oleh karena itu kita perlu membuat script memfilter data berdasarkan wilayah ASIA dan tanggal membaca lebih dari 31 Desember 2023, lalau menghitung jumlah buku dalam setiap genre
 ```
 awk -F',' '$9 ~ /Asia/ && $5 > "2023-12-31" {count[$4]++}
 END {max=0; genre=""; for (g in count) if (count[g] > max) {max = count[g]; genre = g} print "Genre paling populer di Asia setelah 2023 adalah " genre " dengan " max " buku."}' reading_data.csv
 ```
+## Output
+![image](https://github.com/user-attachments/assets/2a841279-24db-4566-97ac-2ec0648ceb6a)
 
 <ISINYA>
 
@@ -433,6 +444,9 @@ untuk mencari nama pokemon dengan Usage% dan RawUsage tertinggi kita memerlukan 
  sort -t ',' -k2 -nr pokemon_usage.csv | awk -F ',' 'NR==1 {max=$2} $2 == max {print "Highest Adjusted Usage:",$1,"with",$2}'
             sort -t ',' -k3 -nr pokemon_usage.csv | awk -F ',' 'NR==1 {max=$3} $3 == max {print "Highest Raw Usage:",$1,"with",$3}'
 ```
+## Output
+![image](https://github.com/user-attachments/assets/c4916261-2d7b-4f40-8858-ebc8d1b0eabf)
+
 # B. Mengurutkan Pokemon berdasarkan data kolom
 untuk kolom yang berisi angka kita sort dengan numerik dan yang nama kita sort secara alfabetis
 ```
@@ -473,6 +487,8 @@ untuk kolom yang berisi angka kita sort dengan numerik dan yang nama kita sort s
             sort -t ',' -k11 -nr pokemon_usage.csv
             ;;
 ```
+## Output sort by Nama
+![image](https://github.com/user-attachments/assets/f8db2090-b44c-4d22-bcbd-bd2c2e7752e8)
 
 
 # C. Mencari nama pokemon tertentu
