@@ -13,10 +13,15 @@
 
 Soal ini meminta untuk output berupa menu dengan setiap case nya yaitu 
 ```
-	a.menghitung jumlah baris di tablet ajaib yang menunjukkan buku-buku yang dibaca oleh Chris Hemsworth.
-	b.menghitung rata-rata durasi membaca (Reading_Duration_Minutes) untuk buku-buku yang dibaca menggunakan “Tablet”
-	c.mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca
-	d.menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta 		jumlahnya, agar laporannya jadi yang terbaik di klub.
+
+echo "pilih jawaban untuk soal ini?"
+echo "1. jumlah buku yang dibaca Chris Hemsworth"
+echo "2. rata-rata durasi membaca dengan tablet"
+echo "3. pembaca dengan rating tertinggi"
+echo "4. genre paling populer"
+echo -n "jawab: "
+read jawaban
+
 ```
 untuk memenuhi permintaan a kita perlu membuat script mencari baris yang hanya menampilkan Chris Hemsworth dan menghitung berapa banyak baris itu muncul dengan menggunakan awk
 
@@ -418,6 +423,54 @@ Menampilkan proses yang sedang berjalan, seperti task manager tetapi menampilkan
 Lalu yang terakhir adalah play_track "$TRACK" sebagai memanggil fungsi play_track dengan argumen yang sudah diambil dari --play=<Track> di awal script.
 
 ### Soal 4
+
+# A. Melihat Summary dari data 
+untuk mencari nama pokemon dengan Usage% dan RawUsage tertinggi kita memerlukan sorting data dari terbesar ke terkecil 
+```
+ sort -t ',' -k2 -nr pokemon_usage.csv | awk -F ',' 'NR==1 {max=$2} $2 == max {print "Highest Adjusted Usage:",$1,"with",$2}'
+            sort -t ',' -k3 -nr pokemon_usage.csv | awk -F ',' 'NR==1 {max=$3} $3 == max {print "Highest Raw Usage:",$1,"with",$3}'
+```
+# B. Mengurutkan Pokemon berdasarkan data kolom
+untuk kolom yang berisi angka kita sort dengan numerik dan yang nama kita sort secara alfabetis
+```
+ "Usage")
+            echo "Sorting by Usage..."
+            sort -t ',' -k2 -nr pokemon_usage.csv
+            ;;
+        "RawUsage")
+            echo "Sorting by RawUsage..."
+            sort -t ',' -k3 -nr pokemon_usage.csv
+            ;;
+        "Nama")
+            echo "Sorting by Nama..."
+            sort -t ',' -f -k1 pokemon_usage.csv
+            ;;
+        "HP")
+            echo "Sorting by HP..."
+            sort -t ',' -k6 -nr pokemon_usage.csv
+            ;;
+        "Atk")
+            echo "Sorting by Atk..."
+            sort -t ',' -k7 -nr pokemon_usage.csv
+            ;;
+        "Def")
+            echo "Sorting by Def..."
+            sort -t ',' -k8 -nr pokemon_usage.csv
+            ;;
+        "Sp.Atk")
+            echo "Sorting by Sp.Atk..."
+            sort -t ',' -k9 -nr pokemon_usage.csv
+            ;;
+        "Sp.Def")
+            echo "Sorting by Sp.Def..."
+            sort -t ',' -k10 -nr pokemon_usage.csv
+            ;;
+        "Speed")
+            echo "Sorting by Speed..."
+            sort -t ',' -k11 -nr pokemon_usage.csv
+            ;;
+```
+
 
 # C. Mencari nama pokemon tertentu
 
