@@ -12,18 +12,33 @@
 #### SOAL 1
 
 Soal ini meminta untuk output berupa menu dengan setiap case nya yaitu 
-1.menghitung jumlah baris di tablet ajaib yang menunjukkan buku-buku yang dibaca oleh Chris Hemsworth.
-2.menghitung rata-rata durasi membaca (Reading_Duration_Minutes) untuk buku-buku yang dibaca menggunakan “Tablet”
-3.mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca
-4.menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya, agar laporannya jadi yang terbaik di klub.
+a.menghitung jumlah baris di tablet ajaib yang menunjukkan buku-buku yang dibaca oleh Chris Hemsworth.
+b.menghitung rata-rata durasi membaca (Reading_Duration_Minutes) untuk buku-buku yang dibaca menggunakan “Tablet”
+c.mencari siapa yang memberikan rating tertinggi untuk buku yang dibaca
+d.menganalisis data untuk menemukan genre yang paling sering dibaca di Asia setelah 31 Desember 2023, beserta jumlahnya, agar laporannya jadi yang terbaik di klub.
 
-untuk memenuhi permintaan nomor 1 kita perlu mencari baris yang hanya menampilkan Chris Hemsworth dan menghitung berapa banyak baris itu muncul dengan menggunakan command 
+untuk memenuhi permintaan a kita perlu membuat script mencari baris yang hanya menampilkan Chris Hemsworth dan menghitung berapa banyak baris itu muncul dengan menggunakan awk
 
-###poppo_siroyo.sh
-awk '/Chris Hemsworth/  { ++n }
+```
+    awk '/Chris Hemsworth/  { ++n }
 END { print "Chris Hemsworth membaca", n, "buku." }' reading_data.csv
+```
 
+kemudian untuk soal b kita perlu membuat script memfilter kata tablet dan menghitung berapa kali baris itu mmuncul dan menjumlah semua output di tabel durasi supaya bisa menghitung rata-rata. 
 
+```
+ awk -F ',' '$8 ~ /Tablet/ {total += $6; count++ }
+END { rata = total/count; print "Rata-rata durasi membaca dengan Tablet adalah", rata,"menit."}' reading_data.csv
+```
+selanjutnya untuk soal c kita membuat script agar menyortir data berdasarkan kolom rating dalam urutan menurun menggunakan ```sort```, lalu menampilkan pembaca dengan rating tertinggi
+```
+sort -t ',' -k7 -nr reading_data.csv | awk -F ',' 'NR == 1 {max =$7} $7 == max {print "Pembaca dengan rating tertinggi : ", $2, "-" ,$3, "-", max}'
+```
+dan soal terkahir kita diminta untuk mencari genre paling populer, oleh karena itu kita perlu membuat script memfilter data berdasarkan wilayah ASIA dan tanggal membaca lebih dari 31 Desember 2023, lalau menghitung jumlah buku dalam setiap genre
+```
+awk -F',' '$9 ~ /Asia/ && $5 > "2023-12-31" {count[$4]++}
+END {max=0; genre=""; for (g in count) if (count[g] > max) {max = count[g]; genre = g} print "Genre paling populer di Asia setelah 2023 adalah " genre " dengan " max " buku."}' reading_data.csv
+```
 
 <ISINYA>
 
