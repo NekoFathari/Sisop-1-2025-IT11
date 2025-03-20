@@ -130,7 +130,7 @@ running_with_param() {
             ;;
         --filter)
             head -n 1 "$FILE"
-            sort -t ',' -k2 -r "$FILE" 
+            sort -t ',' -k2 -r "$FILE" | grep -i "$SEARCH_TERM"
             ;;
         --info)
             sort -t ',' -k2 -nr "$FILE" | awk -F ',' 'NR==1 {max=$2} $2 == max {print "Highest Adjusted Usage:",$1,"with",$2}'
