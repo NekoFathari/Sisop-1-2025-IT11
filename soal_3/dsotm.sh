@@ -36,11 +36,17 @@ play_track() {
         "On the Run")
             title "On the Run"
             progress=0
-            while [ $progress -lt 100 ]; do
-                progress=$((progress + RANDOM % 10))
-                [ $progress -gt 100 ] && progress=100
-                echo -ne "\rTunggu ya..: [$(printf '#%.0s' $(seq 1 $((progress / 2))))$(printf ' %.0s' $(seq 1 $((50 - progress / 2))))] $progress%"
-                sleep $(awk -v min=0.1 -v max=1 'BEGIN{srand(); print min+rand()*(max-min)}')
+	    bar_length=50
+     	while [ $progress -lt 100 ]; do
+    	progress=$((progress + RANDOM % 10))
+    	[ $progress -gt 100 ] && progress=100
+
+    	filled_length=$((progress * bar_length / 100))
+    	filled=$(printf '#%.0s' $(seq 1 $filled_length))
+
+    	printf "\rTunggu ya..: [%-${bar_length}s] %d%%" "$filled" "$progress" //untuk mengisi penuh tanpa ada spasi sisa yang terlihat
+	sleep $(awk -v min=0.1 -v max=1 'BEGIN{srand(); print min+rand()*(max-min)}')
+
             done
 	    echo ""
             echo -e "\e[1;36m TERSELESAIKAN!^-^\e[0m"
