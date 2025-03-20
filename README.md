@@ -225,5 +225,83 @@ berikut saat suddah melakukan login
     printf "%${padding}s6. Exit Terminal\n"
     echo
 
+### Soal 3
+Membuat script bertemakan setidaknya ada 5 dari 10 lagu dalam album tersebut. Sebagai salah satu peserta, kamu memutuskan untuk memilih Speak to Me, On the Run, Time, Money, dan Brain Damage. Saat program ini dijalankan, terminal harus dibersihkan terlebih dahulu agar tidak mengganggu tampilan dari fungsi fungsi yang kamu buat.Program ini dijalankan dengan cara ./dsotm.sh --play=”<Track>”
+
+    A. Speak to Me
+    B. On the Run
+    C. Time
+    D. Money
+    E. Brain Damage
+## A. Speak to Me
+Mengambil data https://raw.githubusercontent.com/annthurium/affirmations/refs/heads/main/affirmations.js untuk menampilkan word affirmation setiap teks.
+
+    play_track() {
+    case "$1" in
+        "Speak to Me")
+            title "Speak to Me"
+                curl -s https://raw.githubusercontent.com/annthurium/affirmations/refs/heads/main/affirmations.js | sed '1d;$d' |  sed -E 's/^[[:space:]]*"//;s/",?$//;' | grep -v '^\];$' | while IFS= read -r line; do
+		echo "$line"
+                sleep 1
+	done
+	    ;;
+
+## Output
+![image](https://github.com/user-attachments/assets/7c8f95a0-d251-4409-820b-0b2e02f7c80c)
+
+## B. On the Run
+Membuat progress bar yang berjalan dengan interval random, tetapi setiap progress bertambah dalam interval waktu yang random dengan range 0.1 hingga 1 detik.
+
+    "On the Run")
+            title "On the Run"
+            progress=0
+            while [ $progress -lt 100 ]; do
+                progress=$((progress + RANDOM % 10))
+                [ $progress -gt 100 ] && progress=100
+                echo -ne "\rTunggu ya..: [$(printf '#%.0s' $(seq 1 $((progress / 2))))$(printf ' %.0s' $(seq 1 $((50 - progress / 2))))] $progress%"
+                sleep $(awk -v min=0.1 -v max=1 'BEGIN{srand(); print min+rand()*(max-min)}')
+            done
+	    echo ""
+            echo -e "\e[1;36m TERSELESAIKAN!^-^\e[0m"
+            ;;
+
+# Kendala
+Outputnya progress bar tidak full hingga ke ujung kanan.
+![image](https://github.com/user-attachments/assets/5d28edb3-719c-482d-9f4c-88c0953ddbe9)
+
+# Perbaikan
+
+     "On the Run")
+            title "On the Run"
+            progress=0
+            bar_length=50
+
+        while [ $progress -lt 100 ]; do
+        progress=$((progress + RANDOM % 10))
+        [ $progress -gt 100 ] && progress=100
+
+        filled_length=$((progress * bar_length / 100))
+        filled=$(printf '#%.0s' $(seq 1 $filled_length))
+
+        printf "\rTunggu ya..: [%-${bar_length}s] %d%%" "$filled" "$progress" //untuk mengisi penuh tanpa ada spasi sisa yang terlihat
+
+        sleep $(awk -v min=0.1 -v max=1 'BEGIN{srand(); print min+rand()*(max-min)}')
+
+            done
+            echo ""
+            echo -e "\e[1;36m TERSELESAIKAN!^-^\e[0m"
+            ;;
+
+## Output setelah perbaikan
+![image](https://github.com/user-attachments/assets/6e60aae5-5c77-4aad-b507-b315f6d5c6de)
+
+
+
+    
+
+
+
+
+
 
 
