@@ -23,23 +23,26 @@ echo -n "jawab: "
 read jawaban
 
 ```
+# A. berapa banyak buku yang dibaca oleh “Chris Hemsworth”
 untuk memenuhi permintaan a kita perlu membuat script mencari baris yang hanya menampilkan Chris Hemsworth dan menghitung berapa banyak baris itu muncul dengan menggunakan awk
 
 ```
     awk '/Chris Hemsworth/  { ++n }
 END { print "Chris Hemsworth membaca", n, "buku." }' reading_data.csv
 ```
-
+# B. menghitung rata-rata durasi membaca
 kemudian untuk soal b kita perlu membuat script memfilter kata tablet dan menghitung berapa kali baris itu mmuncul dan menjumlah semua output di tabel durasi supaya bisa menghitung rata-rata. 
 
 ```
  awk -F ',' '$8 ~ /Tablet/ {total += $6; count++ }
 END { rata = total/count; print "Rata-rata durasi membaca dengan Tablet adalah", rata,"menit."}' reading_data.csv
 ```
+# C. rating tertinggi untuk buku yang dibaca
 selanjutnya untuk soal c kita membuat script agar menyortir data berdasarkan kolom rating dalam urutan menurun menggunakan ```sort```, lalu menampilkan pembaca dengan rating tertinggi
 ```
 sort -t ',' -k7 -nr reading_data.csv | awk -F ',' 'NR == 1 {max =$7} $7 == max {print "Pembaca dengan rating tertinggi : ", $2, "-" ,$3, "-", max}'
 ```
+# D. genre yang paling sering dibaca
 dan soal terkahir kita diminta untuk mencari genre paling populer, oleh karena itu kita perlu membuat script memfilter data berdasarkan wilayah ASIA dan tanggal membaca lebih dari 31 Desember 2023, lalau menghitung jumlah buku dalam setiap genre
 ```
 awk -F',' '$9 ~ /Asia/ && $5 > "2023-12-31" {count[$4]++}
