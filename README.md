@@ -277,13 +277,13 @@ berikut saat suddah melakukan login
 ### Soal 3
 Membuat script bertemakan setidaknya ada 5 dari 10 lagu dalam album tersebut. Sebagai salah satu peserta, kamu memutuskan untuk memilih Speak to Me, On the Run, Time, Money, dan Brain Damage. Saat program ini dijalankan, terminal harus dibersihkan terlebih dahulu agar tidak mengganggu tampilan dari fungsi fungsi yang kamu buat.Program ini dijalankan dengan cara ./dsotm.sh --play=”<Track>”
 
-    A. Speak to Me
-    B. On the Run
-    C. Time
-    D. Money
-    E. Brain Damage
+    A. Speak to Me = Menampilkan Word of affirmation
+    B. On the Run = Membuat progress bar
+    C. Time = Membuat live clock
+    D. Money = Membuat cmatrix 
+    E. Brain Damage = Menampilkan task manager
 ## A. Speak to Me
-Mengambil data https://raw.githubusercontent.com/annthurium/affirmations/refs/heads/main/affirmations.js untuk menampilkan word affirmation setiap teks.
+Mengambil data https://raw.githubusercontent.com/annthurium/affirmations/refs/heads/main/affirmations.js untuk menampilkan word of affirmation setiap teks.
 
     play_track() {
     case "$1" in
@@ -492,6 +492,7 @@ untuk kolom yang berisi angka kita sort dengan numerik dan yang nama kita sort s
 
 
 # C. Mencari nama pokemon tertentu
+Disini untuk mengetahui pokemon yang mungkin dapat bertanding dengan baik melawan sebagian besar pokemon yand ada di top 1 usage. 
 
  	 case "$COMMAND" in
         --grep)
