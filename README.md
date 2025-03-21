@@ -503,10 +503,38 @@ Disini untuk mengetahui pokemon yang mungkin dapat bertanding dengan baik melawa
 # Output
 ![image](https://github.com/user-attachments/assets/9e739819-644f-483c-9f01-8ff105c74361)
 
-# D.
+# D. Mencari Pokemon berdasarkan filter nama type
+pada step ini kita harus mencari suatu filter dengan nama sesuai dengan output yang diharapkan
 
+#### pokemon_analysis.sh
+	--filter)
+            head -n 1 "$FILE"
+            sort -t ',' -k4,5 -r "$FILE" | grep -i "$SEARCH_TERM"
+            ;;
 
-# E.
+#### Kendala
+Awalnya tidak ingin keluar, karena munculnya tetap error handling
+![image](https://github.com/user-attachments/assets/3e9543db-3c72-4f9a-a743-0f3baaf39f2e)
+
+hanya masalah kecil saat melakukan yang harus di fix
+#### pokemon_analysis.sh
+	elif [ "$#" -eq 2 ]; then
+   	    running_with_param "$1" "$2"
+	elif [ "$#" -eq 3 ]; then
+	    running_with_param "$1" "$2" "$3"
+	.....
+fi
+
+# E. Error handling
+Karena dibutuhkan erorr handling maka
+#### pokemon_analysis.sh
+	else
+	    echo -e "\e[31m[Error]\e[0m \e[33mInvalid use of arguments!\e[0m"
+	    echo "Usage: $0 <file> <command> <search_term>"
+	    echo "Example: $0 pokemon_usage.csv --sort Usage"
+	    echo "For more information, use --help or -h"
+	    exit 1
+	fi
 
 
 # F. Helpscreen 
